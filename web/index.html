@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ESP32-CAM Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+
+    <!-- ── Header ─────────────────────────────────────────────────────────── -->
+    <header class="header">
+      <div class="header-inner">
+        <div class="brand">
+          <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+            <circle cx="12" cy="13" r="4"/>
+          </svg>
+          <span class="brand-name">ESP32-CAM</span>
+          <span class="brand-sub">Dashboard</span>
+        </div>
+        <div class="sse-indicator" id="sseIndicator" title="Server connection">
+          <span class="sse-dot"></span>
+          <span class="sse-label" id="sseLabel">Connecting…</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── Main content ───────────────────────────────────────────────────── -->
+    <main class="main">
+
+      <!-- Top row: status + controls -->
+      <div class="top-grid">
+
+        <!-- Camera status card -->
+        <div class="card" id="statusCard">
+          <div class="card-label">Camera</div>
+          <div class="status-row">
+            <div class="status-badge offline" id="cameraBadge">
+              <span class="badge-dot"></span>
+              <span class="badge-text" id="badgeText">Offline</span>
+            </div>
+          </div>
+          <dl class="meta-list">
+            <div class="meta-row">
+              <dt>Last seen</dt>
+              <dd id="lastSeen">—</dd>
+            </div>
+            <div class="meta-row">
+              <dt>Request</dt>
+              <dd id="requestStateMeta">Idle</dd>
+            </div>
+          </dl>
+        </div>
+
+        <!-- Capture control card -->
+        <div class="card capture-card">
+          <div class="card-label">Controls</div>
+          <button class="btn-capture" id="captureBtn" disabled>
+            <span class="btn-spinner" id="btnSpinner" aria-hidden="true"></span>
+            <svg class="btn-icon" id="btnIcon" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+            <span class="btn-label" id="btnLabel">Capture Photo</span>
+          </button>
+          <div class="request-state-bar" id="requestStateBar">
+            <span class="state-icon idle" id="stateIcon"></span>
+            <span class="state-text" id="stateText">Idle</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Photo display card -->
+      <div class="card photo-card" id="photoCard">
+        <div class="photo-card-header">
+          <span class="card-label">Latest Photo</span>
+          <span class="photo-meta" id="photoMeta"></span>
+        </div>
+
+        <!-- Empty state -->
+        <div class="photo-empty" id="photoEmpty">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21 15 16 10 5 21"/>
+          </svg>
+          <p>No photo captured yet</p>
+          <p class="photo-empty-sub">Click "Capture Photo" to take the first shot.</p>
+        </div>
+
+        <!-- Photo -->
+        <div class="photo-frame" id="photoFrame" style="display:none">
+          <img id="photoImg" src="" alt="Latest capture" />
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
