@@ -83,11 +83,12 @@ bash
 # 1. Copy and edit secrets
 
 cp firmware/include/secrets.h.example firmware/include/secrets.h
+
 # Edit firmware/include/secrets.h:
-#   WIFI_SSID     — your network name
-#   WIFI_PASSWORD — your network password
-#   SERVER_HOST   — LAN IP of the machine running the server (NOT localhost)
-#   SERVER_PORT   — default 8000
+   WIFI_SSID     — your network name
+   WIFI_PASSWORD — your network password
+   SERVER_HOST   — LAN IP of the machine running the server (NOT localhost)
+   SERVER_PORT   — default 8000
 
 # 2. Wire GPIO0 to GND on the ESP32-CAM (enables flash mode)
 
